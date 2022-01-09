@@ -1,0 +1,10 @@
+1.  split(<col>, 'delimiter') -> example split('Hive:Hadoop', ':') = ['Hive', 'Hadoop']
+
+
+2.  substr(<col>, <starting index>, <total number of characters to include in substr>)
+    example:  substr('Hive is a querying tool', 4, 3) = e i 
+              substr function uses 1 based indexing.
+
+
+3.  instr(<col>, <character or substr whose starting position needs to be found>)
+    example:    instr('Hive is a querying tool', 'e') = 4

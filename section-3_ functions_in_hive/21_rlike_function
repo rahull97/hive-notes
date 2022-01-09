@@ -1,0 +1,21 @@
+1.  RLIKE is a shorthand abbreviation for right like.
+
+2.  It is a special function in Hive, where if any substring of A 
+    matches with B, then it evaluates to true.
+    Usually while matching a substring, we put % symbol before and 
+    after a substring, but in rlike we do not need to do that for a 
+    simple match.
+
+3. Examples:
+
+   syntax: select <main-string> rlike <sub-string> ...;
+
+   select 'hadoop' rlike 'ha';  # true
+
+   select 'hadoop' rlike 'ha*'; # true
+
+   select 'hadoop     ' rlike 'hadoop' # true
+
+   select null rlike 'hadoop'; # null
+
+   select 'hadoop' rlike null; # null

@@ -1,0 +1,23 @@
+Some of the date functions in Hive are:
+
+1.  unix_timestamp(<timestamp string>) -> returns unix time 
+2.  from_unixtime(<unix_time>) -> returns corressponding timestamp
+3.  TO_DATE(<string timestamp>)
+4.  YEAR(<string timestamp>)
+5.  MONTH(<string timestamp>)
+6.  DAY<string timestamp>)
+7.  HOUR(<string timestamp>)
+8.  MINUTE(<string timestamp>)
+9.  SECOND(<string timestamp>)
+10. WEEKOFYEAR(<string timestamp>)
+11. DATEDIFF(<string date 1>, <string date 2>)
+12. DATE_ADD(<string date>, int days)
+13. DATE_SUB(<string date>, int days)
+
+
+Some of the Mathematical functions in Hive are:
+
+1. ceil(<number>)
+2. floor(<number>)
+3. round(<number>, <number of digits till which the given number should be rounded>)
+4. rand(<seed>)

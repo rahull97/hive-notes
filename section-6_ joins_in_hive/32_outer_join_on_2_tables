@@ -1,0 +1,15 @@
+===
+Outer join types:
+
+1. Left outer join
+2. Right outer join
+3. Full outer join
+
+Example:
+
+SELECT emp_tab.emp_id, emp_tab.emp_name, emp_tab.designation, 
+dept_tab.dept_id, dept_tab.dept_name, dept_tab.dept_city 
+FROM emp_tab LEFT OUTER JOIN dept_tab 
+ON (emp_tab.dept_id = dept_tab.dept_id);
+
+===

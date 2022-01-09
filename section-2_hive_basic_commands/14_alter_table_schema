@@ -1,0 +1,47 @@
+1.  Add new columns:
+
+    alter table tab add columns if not exists(col4 string, col5 int);
+
+    # add column after some specific column
+    # alter table <table-name> change <old-col-name> <new-col-name> <data-type> after <name-of-col-after-which-new-col-should-be-placed>
+    alter table tab change col1 col1 int after col3;
+
+2.  Change column names:
+
+    # alter table <table-name> change <old-col-name> <new-col-name> <data-type>
+    alter table tab change col2 new_col2 string;
+
+3.  Rename table:
+
+    alter table tab rename to tab1;
+
+    WE HAVE TO BE VERY CAREFUL WHILE CHANGING THE SCHEMA OF THE TABLE
+
+4.  Remove columns:
+
+    Hive provides us a REPLACE COLUMN clause.
+    Replace columns will delete all the previous columns
+    and add the new columns.
+
+    alter table tab replace columns (id int, name string);
+
+5.  Table properties
+
+    Same as database can be created with DB properties.
+    Table can also be created with table properties.
+
+    example:
+
+    create table test1 (col1 int, col2 string) 
+    stored as textfile
+    tblproperties('skip.header.line.count=3');
+
+    desc formatted test1;
+
+    we can set tblproperties using alter command too:
+
+    example:
+
+    alter table test1 set tblproperties('auto.purge'='true');
+
+    alter table test1 set fileformat avro; # changes input file format.

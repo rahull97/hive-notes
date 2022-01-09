@@ -1,0 +1,14 @@
+It is also possible to load data from source table
+into multiple other tables
+
+# multi-insert command
+
+1.  create table developer_tab (id int, name stirng, desg string)
+    stored as textfile;
+
+2.  create table manager_tab (id int, name stirng, desg string)
+    stored as textfile;
+
+3.  from emp_tab 
+    insert into table developer_tab select col1,col2,col3 where col3='Developer'
+    insert into table manager_tab select col1,col2,col3 where col3='Mgr';

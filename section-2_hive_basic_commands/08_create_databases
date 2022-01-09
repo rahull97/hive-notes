@@ -1,0 +1,27 @@
+Database is used to store the metadata of the tables under it.
+
+Commands related to a database:
+
+1.  create database d1;
+
+2.  create database if not exists d1;
+
+3.  describe database d1;
+
+4.  create database if not exists d2 comment "this is a database";
+
+5.  describe database extended d2;
+
+6.  we can also create a database with dbproperties. There are some 
+    predefined dbproperties linked with the database.
+
+    create database if not exists d3 with dbproperties('creator'='rahul', 'date'='2021-11-16');
+
+    describe database extended d3;
+
+7.  List all the databases =  show databases;
+
+8.  If a table is created without mentioning database name and particular database is not checked out, 
+    than it will be created under 'default' database.
+
+9.  checkout or use particular database = use d2;

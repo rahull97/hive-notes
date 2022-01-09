@@ -1,0 +1,33 @@
+===
+
+Two clauses in Hive that can guard our table:
+
+1.  no_drop
+2.  offline
+
+===
+
+no_drop: It prevents from table or partition being accidently dropped.
+
+command: ALTER TABLE emp_tab ENABLE NO_DROP;
+
+         ALTER TABLE emp_tab DISABLE NO_DROP;
+
+         # Limit to a partition
+
+         ALTER TABLE part_dept PARTITION(deptname="HR") ENABLE NO_DROP;
+
+        ALTER TABLE part_dept PARTITION(deptname="HR") DISABLE NO_DROP;
+
+===
+
+offline: It prevents our data from being queried.
+
+command: ALTER TABLE dept_tab ENABLE OFFLINE;
+
+         ALTER TABLE dept_tab DISABLE OFFLINE;
+
+         ALTER TABLE part_dept PARTITION(deptname="HR") ENABLE OFFLINE;
+
+         ALTER TABLE part_dept PARTITION(deptname="HR") DISABLE OFFLINE;
+===

@@ -1,0 +1,10 @@
+===
+Bucketing
+
+1.  It is another data organizing technique used in Hive.
+
+2.  All the same column values of a bucketed column will go into the same bucket.
+
+3.  It can be used alone or along with partitioning.
+
+4.  Partitioning creates a new folder, where as bucketing creates a new file.

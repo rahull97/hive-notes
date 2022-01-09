@@ -1,0 +1,50 @@
+To sort our data in Hive, we have four clauses:
+
+1.  order by
+2.  sort by
+3.  distribute by
+4.  cluster by
+
+---
+order by command:
+    It is used for full sorting of the data. It guarantees total ordering of data,
+    and for that it has to be passed through SINGLE REDUCER. 
+    Thus it uses single reducer for sorting of data.
+    In strict mode, the order by clasue must be followed by limit by clause.
+ 
+query example:
+    select col2 from table2 order by col2;
+
+
+---
+sort by command:
+    It also does sorts data but within a REDUCER. It can use more than ONE REDUCER to 
+    a SORT a data. Thus sort by clause does not guarantees the full sorting(ordering)
+    of the data.
+
+query example:
+    select col2 from table2 sort by col2;
+
+
+---
+distribute by command:
+    Hive uses distribute by clause to distribute the key value pairs among the reducers.
+    It decides which key will go to which reducers. 
+    It ensures that all the rows with same distribute by column value will go to the 
+    same reducer.
+    It simply distributes the data amongst the reducers.
+    Thus there is no overlapping of the data with same distribute by column value amongst the different 
+    reducers.
+
+    To do sorting we can combine it with the sort by clause.
+
+query example:
+    select col1, col2 from table2 distribute by col2 sort by col2;
+                            or
+    select col1, col2 from table2 cluster by col2;
+
+---
+cluster by = distribute by sort by
+
+query example:
+    select col1, col2 from table2 cluster by col2;

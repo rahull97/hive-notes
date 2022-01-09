@@ -1,0 +1,31 @@
+In Hive partitioning can be done in two ways:
+
+1.  Static partitioning
+2.  Dynamic partitioning
+
+===
+In Static partitioning, we have to load data into its respective partitions manually.
+
+1.  create a partitioned table example:
+
+CREATE TABLE IF NOT EXISTS PART_DEPT (deptno int, empname string, sal int)
+PARTITIONED BY (deptname string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+In case of static partitioning, on whatever column we are doing static partitioning,
+that column should not be included in create statement.
+
+2.  insert data into partitioned table
+
+INSERT INTO PART_DEPT 
+PARTITION (deptname="HR")
+SELECT col1, col3, col4 FROM dept WHERE col2 = "HR";
+
+3.  We can also directly load static partitions using load command.
+    But in that case, our data should be segregated priorly on partition column.
+
+LOAD DATA LOCAL INPATH '/home/user/act' INTO TABLE part_dept PARTITION (deptname="accounts");
+===

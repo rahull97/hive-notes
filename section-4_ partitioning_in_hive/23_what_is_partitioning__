@@ -1,0 +1,9 @@
+Partitioning:   It means to segregate the data into various directories according to partitioning column.
+                It improves the speed of Select queries, as only the required data is scanned and retrieved.
+
+
+example:    Partioning by department column in department table.
+            
+            1. /home/user/dept_table/deptname=Accounts
+            2. /home/user/dept_table/deptname=HR
+            3. /home/user/dept_table/deptname=Sales

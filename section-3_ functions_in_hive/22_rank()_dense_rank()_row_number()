@@ -1,0 +1,34 @@
+---
+
+1. rank() -> It gives the ranking within ORDERED PARTITION. 
+             Ties are assigned the same rank, with the next
+             ranking(s) skipped.
+
+2. dense_rank() -> It gives the ranking within ORDERED PARTITION,
+                   but the ranks are consecutive. 
+                   No ranks are skipped even if there are ties.
+
+3. row_number() -> It assigns unique numbers to each row WITHIN the
+                   PARTITION given the order by clause.
+
+Examples:
+
+1.  select name, 
+    transaction_amount, 
+    rank() over(order by transaction_amount desc)    # since we are using order by it will use only single reducer.
+    from table1;
+
+2.  select name,
+    transaction_amount,
+    dense_rank() over(order by transaction_amount desc)
+    from table1;
+
+3.  select name,
+    transaction_amount,
+    row_number() over(order by transaction_amount desc)
+    from table1;
+
+4.  select name,
+    transaction_amount,
+    row_number() over(partition by name order by transaction_amount desc)
+    from table1;

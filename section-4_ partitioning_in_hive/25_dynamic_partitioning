@@ -1,0 +1,48 @@
+In Dynamic partitioning, Hive automatically create partitions based on the 
+partitioning column value.
+
+Instead of user providing partition names and selecting the data from source,
+Hive does it all by itself.
+We just have to provide the column on which partitioning needs to be done,
+rest all is handled by Hive. 
+
+By default dynamic partitioning is disabled.
+We can enable it by below commands:
+SET hive.exec.dynamic.partition=truel;
+SET hive.exec.dynamic.partition.mode = nonstrict;
+
+In strict mode we have provide atleast one static partition along
+with other dynamic partitions, in case if we are doing partitioning 
+on multiple columns.
+===
+1. Create partitioned table
+
+CREATE TABLE IF NOT EXISTS part_dept1 (deptno int, empname string, sal int)
+PARTITIONED BY (deptname string)
+row format delimited
+fields terminated by ','
+lines terminated by '\n'
+stored as textfile;
+
+2. Insert data from source table into partitioned table using dynamic partitioning;
+
+INSERT INTO TABLE part_dept1 
+PARTITION (deptname)
+SELECT col1, col3, col4, col2 from dept;
+
+NOTE: Column on which partitioning needs to be done, should be present in last in select statement.
+
+Thus Hive will check partitioning column values and create a separate partition for each unique value.
+===
+
+Which partitioning type to use and when?
+
+STATIC PARTITIONING = use in cases where the data is well known to us in advance.
+                      We can use static partitioning where partition column values are
+                      not much unique, which eventually lead to small number of partitions.
+
+DYNAMIC PARTITIONING = use in cases where the data is not well known to us in advance or it
+                       has more unique values in partitioning column.
+
+
+static partitioning is faster than dynamic partitioning.

@@ -1,0 +1,11 @@
+===
+Inner join query example:
+
+SELECT emp_tab.emp_id, emp_tab.emp_name, emp_tab.designation, 
+dept_tab.dept_id, dept_tab.dept_name, dept_tab.dept_city 
+FROM emp_tab INNER JOIN dept_tab 
+ON (emp_tab.dept_id = dept_tab.dept_id);
+
+Hive only supports equal to operator in join condition.
+
+===

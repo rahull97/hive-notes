@@ -1,0 +1,26 @@
+===
+
+# Join using three or more tables...based on a common column in all the tables,
+
+Example:
+
+SELECT emp_tab.emp_id, emp_tab.emp_name,                                                # First table col
+dept_tab.dept_id, dept_tab.dept_name,                                                   # Second table col
+another_dept_tab.dept_code                                                              # Third table col
+FROM emp_tab INNER JOIN dept_tab ON (emp_tab.dept_id = dept_tab.dept_id)                # Join on dept id col
+INNER JOIN another_dept_tab ON (dept_tab.dept_id = another_dept_tab.dept_id);           # Join on dept id col
+
+
+The above join expression can be used for than 3 tables by chaining join condition commands.
+
+===
+
+# We can join based on different join conditions.
+
+SELECT emp_tab.emp_id, emp_tab.emp_name,                                                    # First table col
+dept_tab.dept_id, dept_tab.dept_name,                                                       # Second table col
+another_dept_tab.dept_code                                                                  # Third table col
+FROM emp_tab INNER JOIN dept_tab ON (emp_tab.string_code = dept_tab.string_code)            # Join on string code col
+INNER JOIN another_dept_tab ON (dept_tab.dept_id = another_dept_tab.dept_id);               # Join on dept_id col
+
+===

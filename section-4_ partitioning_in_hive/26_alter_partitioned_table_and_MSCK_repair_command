@@ -1,0 +1,22 @@
+In real time we have to add/drop partitions off a table very frequently.
+===
+Command to see the partitions inside a table:
+    show partitions part_dept1;
+
+Drop partition of a table:
+    alter table part_dept1 drop partition (deptname='HR');
+
+In case of internal table, metadata and partition data is deleted.
+In case of external table, metadata is deleted, that is we cannot
+query partition data through Hive, but the partition data in HDFS 
+is not deleted.
+
+===
+Add partition in a table:
+    alter table part_dept1 add partition (deptname="Dev");
+
+    load data local inpath '/home/user/dev' into table part_dept1 partition(deptname="Dev");
+
+===
+Command to update the metadata of Hive table, in case new partitions are added directly in HDFS:
+    msck repair table part_dept1;

@@ -1,0 +1,24 @@
+Load a data FROM a table and INTO a table
+
+# The below property displays table column names in CLI  
+set hive.cli.print.header=true;
+
+We use INSERT command to load the data FROM a table INTO a another table.
+Example:
+    source table name = emp_tab;
+
+    # we do not need to provide other properties such as
+    # row format delimited etc, because we are loading
+    # the data from other table, and Hive has a full 
+    # knowledge about the structure of the data.
+    create table tab (col1 int, col2 string, col3 string)
+    stored as textfile;
+
+    # load data from another table. it will append to existing data.
+    insert into table tab select col1,col2,col3 from emp_tab;
+
+    # load data by overwriting existing data.
+    insert overwrite table tab select col1,col2,col3 from emp_tab;
+
+    # we can specify where clauses, join conditions etc
+    insert overwrite table tab select col1,col2,col3 from emp_tab where col3='Developer';

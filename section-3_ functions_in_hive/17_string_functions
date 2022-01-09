@@ -1,0 +1,12 @@
+Some of the string functions in Hive are:
+
+1.  concat(<col1>, <delimiter>, <col2>) -> example concat(col1, '-', col2) = 4025-England
+2.  length(<col>)
+3.  lower(<col>)
+4.  upper(<col>)
+5.  lpad(<col>, <total length of string including padded characters>, <padding character>) -> example lpad(col1, 10, 'v')
+6.  rpad(<col>, <total length of string including padded characters>, <padding character>)
+7.  ltrim(<col>)
+8.  rtrim(<col>)
+9.  repeat(<col>, <number of times to repeat value>) -> example repeat('England', 2) = 'EnglandEngland'
+10. reverse(<col>)

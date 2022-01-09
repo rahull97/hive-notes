@@ -1,0 +1,58 @@
+====
+tablesampling: 
+
+It means to take a sample of data in a fashion manner.
+
+In other words, tablesampling collects the data in a
+distributed manner from a number of buckets.
+
+Thus it allows us to have handy realistic sample dataset.
+
+"limit" cannot give us such realistic sample, as it may fetch data from a single partition and single bucket.
+
+===
+
+table sampling command:
+
+SELECT deptno, empname, sal, location 
+FROM dept_buck
+TABLESAMPLE (bucket 1 out of 2 on location); 
+
+explaination:
+
+1.  dept_buck table is created using 4 buckets for each partition.
+
+2.  meaning of "TABLESAMPLE (bucket 1 out of 2 on location)"
+    
+    Divide 4 buckets into groups of 2 bucket each and 
+    then select first bucket of every group;
+
+===
+
+tablesampling can be done on any column even on non-bucketed column, but 
+in that case it will require more time, as it needs to scan entire table
+and than fetch the sample.
+
+Thus it is recommended to do table sampling on bucketed column.
+
+===
+
+Sampling can also be done using some other parameters like percentage
+or number of rows.
+
+They come under "block sampling".
+
+example:
+
+SELECT deptno, empname, sal, location 
+FROM dept_buck
+TABLESAMPLE (2 percent); # pick atleast 2 % of the dataset.
+
+SELECT deptno, empname, sal, location 
+FROM dept_buck
+TABLESAMPLE (1M); # pick atleast 1 MB of data as a sample.
+
+SELECT deptno, empname, sal, location 
+FROM dept_buck
+TABLESAMPLE (20 rows); # pick 20 rows from each input split.
+===

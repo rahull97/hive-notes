@@ -1,0 +1,56 @@
+There are two types of table created in Hive:
+
+1.  External table - Hive is only responsible for table's metadata
+2.  Internal table - Hive is the sole owner of table's data, as well as metadata
+
+If we drop an Internal table in Hive, than both metadata and actual data
+is lost.
+
+If we drop an External table in Hive, only metadata is lost.
+
+By Default Hive creates an INTERNAL table.
+
+create table commands:
+
+1.  create table if not exists table1 (col1 string, col2 array<string>, col3 string, col4 int) 
+    row format delimited 
+    fields terminated by ',' 
+    collection items terminated by ':'
+    lines terminated by '\n'
+    stored as textfile;
+
+2.  external table creation:
+
+    create external table if not exists table2 (col1 string, col2 array<string>, col3 string, col4 int) 
+    row format delimited 
+    fields terminated by ',' 
+    collection items terminated by ':'
+    lines terminated by '\n'
+    stored as textfile;
+
+3.  get loaction of all the databases and tables stored:
+    if location is not mentioned while creating tables, by default they are stored at a below mentioned, config value.
+    command = set hive.metastore.warehouse.dir;
+    output (by default) = hive.metastore.warehouse.dir = /user/hive/warehouse
+
+
+4.  store table in some other location, other than hive.metastore.warehouse.dir, 
+    then we have to explicitly mention that path from HDFS, during table creation.
+
+    create table if not exists table3 (col1 string, col2 array<string>, col3 string, col4 int) 
+    row format delimited 
+    fields terminated by ',' 
+    collection items terminated by ':'
+    lines terminated by '\n'
+    stored as textfile
+    location '/user/rahul/table3';
+
+5.  after table creation we have to load a file in it or we can say link the metadata to our file
+
+    local keyword is used if we want to load data from local filesystem and not from HDFS.
+    
+    load data local inpath '/home/rahul/data.txt' into table table1; # into is used to append the data.
+
+    load data inpath 'path/on/hdfs';
+
+    load data local inpath '/home/rahul/data.txt' overwrite table table1;

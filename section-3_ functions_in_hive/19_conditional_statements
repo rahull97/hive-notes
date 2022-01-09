@@ -1,0 +1,71 @@
+---
+
+1. if statement
+
+    syntax = select if(<condition>, <col to select if condition evaluation is true>, <col to select if condition evaluation is false>)
+    example = select if(col3 = 'England', col1, col4)
+
+---
+
+2. case statement
+
+    syntax:
+
+    CASE <CONDITION>
+
+    WHEN <EXPRESSION>
+
+    ...
+
+    END
+
+    example:
+
+    CASE Fruit
+
+         WHEN 'APPLE' THEN 'The owner is APPLE'
+
+         WHEN 'ORANGE' THEN 'The owner is ORANGE'
+
+         ELSE 'It is another Fruit'
+    
+    End 
+
+    The above example can be re-written in another form also as shown below. 
+    The output of both the form will be same.
+
+    CASE WHEN Fruit = "APPLE" THEN 'The owner is APPLE'
+         
+         WHEN Fruit = "ORANGE" THEN 'The owner is ORANGE'
+
+         ELSE 'It is another Fruit'
+
+    END
+
+---
+
+3. isnull and isnotnull functions.
+
+    It returns boolean.
+
+    exmaple:    select isnull(col1) from table1;
+                select isnotnull(col1) from table1;
+
+---
+
+4. COALESCE(col1, col2, ....)
+
+   It selects the first non null value from the multiple fields.
+
+   example:     select COALESCE(datefield1, datefield2, datefield3) as first_date_found from table1;
+
+---
+
+5.  NVL(col1, col2)
+
+    NVL function is same as COALESCE function. 
+    The only difference is that is takes only TWO ARGUMENTS(columns).
+
+    example:    select supplier_id, NVL(supplier_desc, supplier_name) from suppliers;
+
+---

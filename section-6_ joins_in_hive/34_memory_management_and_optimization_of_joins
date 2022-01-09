@@ -1,0 +1,20 @@
+===
+The approach used by Hive to perform joins by default is:
+
+1. Last table in query is streamed
+2. Rest are buffered in memory
+
+Thus we should keep large table at the last in join query.
+In this way considerable amount of memory can be saved.
+===
+We can also override default behaviour by explicitly telling Hive which table should be streamed.
+
+Example:
+
+SELECT /*+ STREAMTABLE(emp_tab) */                                  # specifying which table to be streamed.
+emp_tab.emp_id, emp_tab.emp_name,                           
+dept_tab.dept_id, dept_tab.dept_name,                               
+another_dept_tab.dept_code                                          
+FROM emp_tab INNER JOIN dept_tab ON (emp_tab.dept_id = dept_tab.dept_id)     
+INNER JOIN another_dept_tab ON (dept_tab.dept_id = another_dept_tab.dept_id);
+===

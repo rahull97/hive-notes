@@ -1,0 +1,17 @@
+What is Hive?
+1.  It is SQL like querying tool to query the data stored in HDFS and other filesystems that integrate with Hadoop.
+2.  It processes Structured data that can be stored into Tables.
+3.  Efficient for Batch processing.
+4.  Hive queries are internally converted into MapReduce programs by its compiler, and resultant MR program actually process the data.
+5.  It supports various storage file formats like Parquet, Sequence file, ORC file, Text file with significant compression.
+
+What is Hive not?
+1.  Hive is not a Databse.It does not store any physical data. It just points to the data lying in HDFS. 
+    It stores the metadata of the HDFS files in form of tables and then sees that HDFS file in tabular manner.
+2.  Hive is not a tool for OLTP. It is closer to being used as OLAP tool
+3.  It does not provide row level insert, update and delete. Even though later version of hive support these commands, but they are supported for specific file formats and they are not much efficient.
+4.  Not used where fast response time is required as in DBMS. Rather used where high latency is acceptable,for example: batch processing.
+5.  Does not support Unstructured data like Audio, Video and Pictures.
+
+Motivation of Hive:
+1.  Hive was created to reduce the complexity of MR programming.

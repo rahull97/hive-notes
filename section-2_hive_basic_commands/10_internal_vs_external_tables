@@ -1,0 +1,41 @@
+Internal tables:
+
+1.  They are fully controlled by Hive.
+2.  Both the datastore and data is managed by Hive.
+3.  The only way to acess Internal tables data is by coming through Hive.
+    No matter if the location of file is in HDFS or Hive's own warehouse directory, Hive
+    does not allow any application to access that data. Thus, if we want to access Internal
+    tables data we have to come through Hive only and we can use only Hive queries over that data
+4.  Dropping the Internal table results in deletion of both METADATA and DATA itself.
+5   Example:
+        create table7 if not exists(col1 string, col2 array<string>, col3 string, col4 int)
+        row format delimited
+        fields terminated by ','
+        collection items terminated by ':'
+        lines terminated by '\n'
+        stored as textfile;
+
+        load data local inpath '/home/rahul/data.txt' into table table7;
+
+        drop table table7; # drops both DATA as well as METADATA
+
+External tables:
+
+1.  Only METADATA of the table is controlled by Hive
+2.  Table DATA is contolled by HDFS.
+3.  They can be accessed by applications other than Hive also.
+4.  Dropping the External table results in dropping of METADATA only,
+5.  Example:
+        create external table12 if not exists(col1 string, col2 array<string>, col3 string, col4 int)
+        row format delimited
+        fields terminated by ','
+        collection items terminated by ':'
+        lines terminated by '\n'
+        stored as textfile;
+
+        load data local inpath '/home/rahul/data.txt' into table table12;
+        drop table table12; # drops METADATA only, but the actual DATA in the HDFS location will be still present.
+
+
+Can I create a table with less number of columns than dataset?
+Yes you can create with less and even more number of columns

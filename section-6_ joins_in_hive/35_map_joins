@@ -1,0 +1,47 @@
+====
+
+Mapping Join: It is a optimization technique, in which tables are joined at mapping phase only 
+              without requiring reducer step.
+              It can be preferred when our data is small, atleast one of the table data is small,
+              so that it can fit into a Mapper's memory and can be cached locally.
+
+There are two ways to perform map joins in Hive:
+
+    1. Manually specifying hint to Hive to perform Map join.
+    2. Setting some of the properties, so that Hive can automatically decide when to perform Map join.
+
+====
+
+Example:
+
+1. Manually specifying hint to Hive to perform Map join
+
+select /*+ MAPJOIN (emp_tab) */                                        # emp_tab will be cached locally
+emp_tab.col1, emp_tab.col2, 
+dept_tab.col1, dept_tab.col2, dept_tab.col3
+from emp_tab inner join dept_tab on (emp_tab.col6 = dept_tab.col1);
+
+====
+
+properties to set, to allow Hive to perform Map Joins automatically
+
+1. set hive.auto.convert.join=true;
+2. set hive.mapjoin.smalltable.filesize;
+
+
+properties to set, to allow Hive to perform BUCKETED MAP Joins
+
+1. set hive.input.format=org.apache.hadoop.hive.ql.io.BucketizedHiveInputFormat;
+2. set hive.optimize.bucketmapjoin=true;
+3. set hive.auto.convert.sortmerge.join=true;
+4. set hive.optimize.bucketmapjoin.sortedmerge=true;
+
+There is no change in way of writing the query to perform bucketed map joins
+
+====
+
+restrictions:
+
+We cannot perform full outer Map joins.
+
+====

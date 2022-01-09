@@ -1,0 +1,33 @@
+---
+explode() -> It takes array as an input and output the elements of array as separate rows.
+
+example -> select explode(col2) as my_col from table1;
+
+The limitation of explode function is that, we can only SELECT THE COLUMN TO BE EXPLODED
+in our select statement. In other words, we cannot select other columns of the table along
+with exploded column.
+
+---
+
+lateral view ->  It overcomes the limitation of the explode function. We can select any
+                 number of columns along with exploded column in select statment.
+
+Working ->  It first explodes the column and store that column inside a virtual table.
+Then it performs join operation between the base table and the virtual table to give the final output.
+
+
+example ->
+
+    select author_name,
+    dummy_booksname
+    from table2
+    lateral view explode(books_name) dummy as dummy_booksname;  # dummy is VIRTUAL TABLE name  and dummy_booksname is exploded column name in virtual table.
+
+
+lateral view can also be used to separate the key and value of map data type into separate columns
+
+# col1 which is of map data type is exploded and stored into a virtual table consisting of two columns named key and value.
+example -> 
+    select key, value from table3 lateral view explode(col1) dummy as key,value; 
+
+---

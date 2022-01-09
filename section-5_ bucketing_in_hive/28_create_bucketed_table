@@ -1,0 +1,41 @@
+===
+By default bucketing is not enabled.
+
+We can enable it using following command:
+set hive.enforce.bucketing = true;
+===
+
+Create a bucketed table:
+
+CREATE TABLE IF NOT EXISTS dept_buck (deptno int, empname string, sal int, location string)
+PARTITIONED BY (deptname string)
+CLUSTERED BY (location) INTO 4 BUCKETS  # bucketing step.
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+insert data into a table using dynamic partitioning
+
+INSERT INTO TABLE dept_buck PARTITION(deptname) 
+SELECT dept,name,sal,loc,dept_name from dept_with_loc; 
+
+Number of reducing tasks = number of buckets.
+
+===
+
+Key points.
+
+1.  Bucket is physically a file.
+
+2.  We can explictly set the number of buckets during table creation.
+
+3.  Bucketing can sometimes be more efficient when used alone.
+
+4.  Bucketed Map Joins are the fastest joins.
+
+    Condition to perform Bucket Map Joins on two tables:
+    
+    Both joining tables should be bucketed on same column as of
+    joining column and both tables should have equal number of
+    buckets.
